@@ -22,6 +22,15 @@
 body {
   padding: 0;
   margin: 0;
+
+  --duration: 0.5s;
+  --timing: ease;
+
+  color: var(--color);
+  background-color: var(--background-color);
+
+  transition: color var(--duration) var(--timing),
+    background-color var(--duration) var(--timing);
 }
 
 h1 {
@@ -33,28 +42,14 @@ p {
   width: fit-content;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: black;
-    background-color: #f1e8e8;
-  }
-
-  button {
-    background-color: #f9f9f9;
-  }
+body.light {
+  color: black;
+  background-color: #f1e8e8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: white;
-    background-color: #1a1a1a;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+body.dark {
+  color: white;
+  background-color: #1a1a1a;
 }
 
 * {

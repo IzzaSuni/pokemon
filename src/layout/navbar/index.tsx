@@ -1,10 +1,13 @@
-import { Typography } from "@mui/material";
-import useIsDesktop from "../../utils/hooks/useIsDesktop";
+import { Box, Button, Typography } from "@mui/material";
 import PockemonPocketIcon from "@/src/assets/icon/pockemon-pocket.png";
-import { FlexBox } from "../../components/core";
+import useIsDesktop from "@/src/utils/hooks/useIsDesktop";
+import { FlexBox } from "@/src/components/core";
+import { UilMoon, UilSun } from "@iconscout/react-unicons";
+import useTheme, { Theme } from "@/src/utils/hooks/useTheme";
 
 export default function Navbar() {
   const isDesktop = useIsDesktop();
+  const { toggleTheme, theme } = useTheme();
 
   return (
     <FlexBox
@@ -25,6 +28,16 @@ export default function Navbar() {
           Pokemons
         </Typography>
       </FlexBox>
+      <Button
+        onClick={() => toggleTheme()}
+        position="absolute"
+        right={0}
+        sx={{ borderRadius: "100%", aspectRatio: 1 / 1 }}
+      >
+        <Typography>
+          {theme === Theme.dark ? <UilMoon /> : <UilSun />}{" "}
+        </Typography>
+      </Button>
     </FlexBox>
   );
 }
