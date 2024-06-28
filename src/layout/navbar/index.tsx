@@ -11,6 +11,8 @@ export default function Navbar() {
   const isDesktop = useIsDesktop();
   const { toggleTheme, theme } = useTheme();
 
+  const ThemeIcon = theme === Theme.dark ? UilMoon : UilSun;
+
   return (
     <Container
       zIndex={10}
@@ -47,12 +49,15 @@ export default function Navbar() {
         }}
       >
         <Typography>
-          {theme === Theme.dark ? <UilMoon /> : <UilSun />}{" "}
+          <ThemeIcon
+            width={isDesktop ? "32px" : "24px"}
+            height={isDesktop ? "32px" : "24px"}
+          />
         </Typography>
       </Button>
       <Button
         onClick={() => toggleTheme()}
-        size="small"
+        size="large"
         sx={{
           borderRadius: "100%",
           position: "absolute",
@@ -61,8 +66,12 @@ export default function Navbar() {
           textTransform: "none",
         }}
       >
-        <UilFavorite />
-        <Typography fontSize={12}>Favorite</Typography>
+        <UilFavorite
+          scale={2}
+          width={isDesktop ? "32px" : "24px"}
+          height={isDesktop ? "32px" : "24px"}
+        />
+        <Typography fontSize={isDesktop ? 16 : 12}>Favorite</Typography>
       </Button>
     </Container>
   );
