@@ -44,14 +44,28 @@ p {
 
 body.light {
   color: black;
+  --color: black;
   background-color: #f1e8e8;
+  --background-color: #f1e8e8;
+  --background-color-2: #f9f9f9;
 }
 
 body.dark {
   color: white;
-  background-color: #1a1a1a;
+  --color: white;
+  --background-color: #1a1a1a;
+  --background-color-2: #212121;
 }
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px var(--background-color-2) inset !important;
+  -webkit-text-fill-color: var(--color) !important;
 }

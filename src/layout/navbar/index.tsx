@@ -5,13 +5,14 @@ import { FlexBox } from "@/src/components/core";
 
 import { UilMoon, UilSun } from "@iconscout/react-unicons";
 import useTheme, { Theme } from "@/src/utils/hooks/useTheme";
+import { Container } from "./navbar.styled";
 
 export default function Navbar() {
   const isDesktop = useIsDesktop();
   const { toggleTheme, theme } = useTheme();
 
   return (
-    <FlexBox
+    <Container
       height={isDesktop ? 36 : 28}
       padding={2}
       justifyContent="center"
@@ -48,6 +49,6 @@ export default function Navbar() {
           {theme === Theme.dark ? <UilMoon /> : <UilSun />}{" "}
         </Typography>
       </Button>
-    </FlexBox>
+    </Container>
   );
 }

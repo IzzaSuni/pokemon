@@ -1,20 +1,19 @@
-import useIsDesktop, { breakpoint } from "@/src/utils/hooks/useIsDesktop";
+import useIsDesktop from "@/src/utils/hooks/useIsDesktop";
 import { ButtonStyled, ImageContainer, Text } from "./homepage.style";
 
 import { FlexBox } from "@/src/components/core";
 import PokemonIcon from "@/src/assets/icon/pockemon-pocket.png";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useGetListPokemons } from "@/src/network/useQueryPokemon";
 
 export default function Homepage() {
   const isDesktop = useIsDesktop();
 
+  const { data } = useGetListPokemons({ page: 1, perPage: 1 });
+
   return (
     <FlexBox
-      margin="auto"
-      mt={isDesktop ? 24 : 8}
-      maxWidth={isDesktop ? breakpoint.m : "auto"}
-      padding={1}
       justifyContent="space-between"
       flexDirection={isDesktop ? "row" : "column"}
       textAlign={isDesktop ? "left" : "center"}
@@ -32,14 +31,19 @@ export default function Homepage() {
           <span>Pokemon</span>
         </Text>
         <Text variant="h2" fontSize={isDesktop ? 18 : 14} mt={2}>
-          with the probability of cathing the Pokemon is 50% to make it yours!
+          {data?.count} pokemons with the probability of cathing it is 50% to
+          make it yours!
         </Text>
         <Link to="/list">
           <ButtonStyled variant="contained">Discover Pokemons</ButtonStyled>
         </Link>
       </Box>
       <ImageContainer m="auto" mt={isDesktop ? 0 : 12}>
-        <img src={PokemonIcon} width={isDesktop ? 300 : 200} />
+        <img
+          alt="pokemon-icon"
+          src={PokemonIcon}
+          width={isDesktop ? 300 : 200}
+        />
       </ImageContainer>
     </FlexBox>
   );

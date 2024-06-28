@@ -51,7 +51,7 @@ export const ImageContainer = styled(Box)`
 
   img {
     &:hover {
-      animation: 1s ${bounceAnimation} infinite;
+      animation: 1s ${bounceAnimation};
     }
   }
 `;
