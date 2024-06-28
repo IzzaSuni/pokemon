@@ -57,8 +57,7 @@ export const ImageContainer = styled(Box)`
 `;
 
 export const ButtonStyled = styled(Button)`
-  background: linear-gradient(-45deg, #fff95b 0%, #ff930f 100%);
-  color: black;
+  background: linear-gradient(0deg, #fff95b 0%, #ff930f 100%);
   margin-top: 32px;
   font-size: 18px;
 `;
