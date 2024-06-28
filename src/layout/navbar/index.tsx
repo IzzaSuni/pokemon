@@ -1,7 +1,8 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import PockemonPocketIcon from "@/src/assets/icon/pockemon-pocket.png";
 import useIsDesktop from "@/src/utils/hooks/useIsDesktop";
 import { FlexBox } from "@/src/components/core";
+
 import { UilMoon, UilSun } from "@iconscout/react-unicons";
 import useTheme, { Theme } from "@/src/utils/hooks/useTheme";
 
@@ -12,13 +13,18 @@ export default function Navbar() {
   return (
     <FlexBox
       height={isDesktop ? 36 : 28}
-      padding={isDesktop ? 2 : 2}
+      padding={2}
       justifyContent="center"
       position="sticky"
       top={0}
     >
       <FlexBox alignItems="center" gap={1}>
-        <img src={PockemonPocketIcon} width="24px" height="24px" />
+        <img
+          alt="pockemon-icon"
+          src={PockemonPocketIcon}
+          width="24px"
+          height="24px"
+        />
         <Typography
           className="navbar"
           fontWeight={700}
