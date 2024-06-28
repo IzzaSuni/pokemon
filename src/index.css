@@ -22,7 +22,6 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: #1a1a1a;
 }
 
 h1 {
@@ -39,7 +38,7 @@ p {
     color: black;
     background-color: #f1e8e8;
   }
- 
+
   button {
     background-color: #f9f9f9;
   }
@@ -47,8 +46,8 @@ p {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color: white
-    background-color: black;
+    color: white;
+    background-color: #1a1a1a;
   }
   a:hover {
     color: #747bff;
