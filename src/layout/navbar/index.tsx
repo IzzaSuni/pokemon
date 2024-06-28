@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <FlexBox
       height={isDesktop ? 36 : 28}
-      padding={isDesktop ? 2 : 1}
+      padding={isDesktop ? 2 : 2}
       justifyContent="center"
       position="sticky"
       top={0}
