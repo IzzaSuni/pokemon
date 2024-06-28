@@ -30,9 +30,13 @@ export default function Navbar() {
       </FlexBox>
       <Button
         onClick={() => toggleTheme()}
-        position="absolute"
-        right={0}
-        sx={{ borderRadius: "100%", aspectRatio: 1 / 1 }}
+        size="small"
+        sx={{
+          borderRadius: "100%",
+          position: "absolute",
+          right: 0,
+          color: "inherit",
+        }}
       >
         <Typography>
           {theme === Theme.dark ? <UilMoon /> : <UilSun />}{" "}
