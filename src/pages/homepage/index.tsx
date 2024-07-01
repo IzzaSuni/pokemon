@@ -1,4 +1,4 @@
-import useIsDesktop from "@/src/utils/hooks/useIsDesktop";
+import useBreakPoint from "@/src/utils/hooks/useBreakPoint";
 import { ButtonStyled, ImageContainer, Text } from "./homepage.style";
 
 import { FlexBox } from "@/src/components/core";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useGetListPokemons } from "@/src/network/useQueryPokemon";
 
 export default function Homepage() {
-  const isDesktop = useIsDesktop();
+  const { isDesktop } = useBreakPoint();
 
   const { data } = useGetListPokemons({ page: 1, perPage: 1 });
 

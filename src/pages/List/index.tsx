@@ -5,7 +5,7 @@ import {
 import { Skeleton, Typography } from "@mui/material";
 import { Text } from "./list.styled";
 import { FlexBox } from "@/src/components/core";
-import useIsDesktop, { breakpoint } from "@/src/utils/hooks/useIsDesktop";
+import useBreakPoint, { breakpoint } from "@/src/utils/hooks/useBreakPoint";
 import PokemonAvatar from "./component/PokemonAvatar";
 import PokemonSearch from "./component/PokemonSearch";
 import { atom, useAtomValue } from "jotai";
@@ -15,7 +15,7 @@ export const searchPokemonAtom = atom("");
 export default function ListPokemons() {
   const search = useAtomValue(searchPokemonAtom);
 
-  const isDesktop = useIsDesktop();
+  const { isDesktop } = useBreakPoint();
   const { data, isFetching } = useGetListPokemons({
     page: 1,
     perPage: 100,

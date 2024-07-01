@@ -3,12 +3,11 @@ import { Form, Search } from "../list.styled";
 import { UilSearch, UilTrash } from "@iconscout/react-unicons";
 import { searchPokemonAtom } from "..";
 import { useAtom } from "jotai";
-import useIsDesktop from "@/src/utils/hooks/useIsDesktop";
+import useBreakPoint from "@/src/utils/hooks/useBreakPoint";
 
 export default function PokemonSearch() {
   const [search, setSearch] = useAtom(searchPokemonAtom);
-  const isDesktop = useIsDesktop();
-  console.log(search);
+  const { isDesktop } = useBreakPoint();
 
   return (
     <Form

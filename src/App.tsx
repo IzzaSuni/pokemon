@@ -1,14 +1,20 @@
 import * as React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import Layout from "./layout";
 import "./index.css";
 import Homepage from "./pages/homepage";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./network/network.config";
 import "./index.css";
-import ListPokemons from "./pages/List";
+import ListPokemons from "./pages/list";
+import Detail from "./pages/detail";
 
-const router = createBrowserRouter([
+const path = [
   {
     path: "/",
     element: <Homepage />,
@@ -17,15 +23,27 @@ const router = createBrowserRouter([
     path: "list",
     element: <ListPokemons />,
   },
-]);
+  {
+    path: "detail/:name",
+    element: <Detail />,
+  },
+];
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<Layout />}>
+      {path?.map((v) => (
+        <Route index {...v} />
+      ))}
+    </Route>
+  )
+);
 export default function App() {
   return (
-    <Layout>
-      <React.Suspense fallback={null}>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-        </QueryClientProvider>
-      </React.Suspense>
-    </Layout>
+    <React.Suspense fallback={null}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </React.Suspense>
   );
 }

@@ -2,6 +2,7 @@ import { useGetPokemonDetail } from "@/src/network/useQueryPokemon";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { Avatar } from "../list.styled";
 import { FlexBox } from "@/src/components/core";
+import { Link } from "react-router-dom";
 
 export default function PokemonAvatar({ name }: { name: string }) {
   const { data, isFetching, isError } = useGetPokemonDetail(name);
@@ -9,19 +10,24 @@ export default function PokemonAvatar({ name }: { name: string }) {
   return (
     <Box width="fit-content" sx={{ cursor: "pointer" }}>
       {!isFetching && (
-        <>
+        <Link to={`/detail/${name}`} style={{ textDecoration: "none" }}>
           <Avatar
             src={
-              // @ts-expect-error no types
-              data?.sprites?.other?.showdown?.front_default ||
-              data?.sprites?.front_default
+              data?.sprites?.other?.dream_world?.front_default ||
+              data?.sprites?.front_default ||
+              ""
             }
             alt={name}
           />
-          <Typography width="auto" textAlign="center" fontWeight={700}>
+          <Typography
+            color="var(--color)"
+            width="auto"
+            textAlign="center"
+            fontWeight={700}
+          >
             {name}
           </Typography>
-        </>
+        </Link>
       )}
       {isFetching && (
         <FlexBox flexDirection={"column"} alignItems={"center"}>

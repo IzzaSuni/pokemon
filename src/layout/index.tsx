@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
 import Navbar from "./navbar";
-import { Box } from "@mui/material";
+import { Box, Snackbar } from "@mui/material";
 import useTheme from "../utils/hooks/useTheme";
-import useIsDesktop, { breakpoint } from "../utils/hooks/useIsDesktop";
+import useBreakPoint, { breakpoint } from "../utils/hooks/useBreakPoint";
+import { Outlet } from "react-router-dom";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout() {
   useTheme();
-  const isDesktop = useIsDesktop();
+  const { isDesktop } = useBreakPoint();
 
   return (
     <Box>
@@ -17,8 +17,9 @@ export default function Layout({ children }: { children: ReactNode }) {
         maxWidth={isDesktop ? breakpoint.m : "auto"}
         padding={1}
       >
-        {children}
+        <Outlet />
       </Box>
+      <Snackbar />
     </Box>
   );
 }
