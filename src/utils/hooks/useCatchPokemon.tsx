@@ -1,5 +1,5 @@
 import { FlexBox } from "@/src/components/core";
-import { TextInput } from "@/src/pages/list/list.styled";
+import { TextInput } from "@/src/pages/list/list.styled.ts";
 import { UilCheckCircle } from "@iconscout/react-unicons";
 import { Button } from "@mui/material";
 import { useAtom } from "jotai";

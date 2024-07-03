@@ -1,6 +1,6 @@
 import { FlexBox } from "@/src/components/core";
 import useCatchPokemon from "@/src/utils/hooks/useCatchPokemon";
-import PokemonAvatar from "../list/component/PokemonAvatar";
+import PokemonAvatar from "@/src/pages/list/component/PokemonAvatar";
 import { breakpoint } from "@/src/utils/hooks/useBreakPoint";
 import { Box, Typography } from "@mui/material";
 
