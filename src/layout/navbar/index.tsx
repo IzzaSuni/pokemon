@@ -64,7 +64,6 @@ export default function Navbar() {
       </Button>
       <Link to={"/favorite"}>
         <Button
-          onClick={() => toggleTheme()}
           size="large"
           sx={{
             borderRadius: "100%",
