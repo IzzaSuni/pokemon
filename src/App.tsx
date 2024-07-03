@@ -11,7 +11,7 @@ import Homepage from "./pages/homepage";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./network/network.config";
 import "./index.css";
-import ListPokemons from "./pages/list";
+import ListPokemons from "./pages/list-pokemon";
 import Detail from "./pages/detail";
 import { SnackbarProvider } from "notistack";
 import Favorite from "./pages/favorite";

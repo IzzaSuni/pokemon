@@ -1,6 +1,6 @@
 import { FlexBox } from "@/src/components/core";
 import { useState } from "react";
-import { TextInput } from "../listStyled";
+import { TextInput } from "../list.styled";
 import { Button } from "@mui/material";
 import { UilCheckCircle } from "@iconscout/react-unicons";
 

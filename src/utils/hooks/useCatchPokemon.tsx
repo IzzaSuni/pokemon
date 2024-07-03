@@ -1,4 +1,4 @@
-import MiniForm from "@/src/pages/list/component/MiniForm";
+import MiniForm from "@/src/pages/list-pokemon/component/MiniForm";
 import { useAtom } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { useSnackbar } from "notistack";

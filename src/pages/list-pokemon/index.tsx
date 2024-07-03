@@ -3,7 +3,7 @@ import {
   useGetPokemonDetail,
 } from "@/src/network/useQueryPokemon";
 import { Skeleton, Typography } from "@mui/material";
-import { Text } from "./listStyled";
+import { Text } from "./list.styled";
 import { FlexBox } from "@/src/components/core";
 import useBreakPoint, { breakpoint } from "@/src/utils/hooks/useBreakPoint";
 import PokemonAvatar from "./component/PokemonAvatar";
