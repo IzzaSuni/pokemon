@@ -59,7 +59,7 @@ export default function Detail() {
                 ml={1}
                 letterSpacing={3}
                 fontFamily="Pokemon Solid"
-                color={"var(--background-color)"}
+                color={"black"}
               >
                 {isCatched ? "Release" : "Catch"}
               </Typography>
@@ -110,7 +110,12 @@ export default function Detail() {
 
             <ButtonBase disableTouchRipple onClick={() => buttonAction()}>
               <img src={PockemonPocketIcon} width={"30px"} height={"30px"} />
-              <Typography fontSize={12} ml={1} fontFamily="Pokemon Solid">
+              <Typography
+                fontSize={12}
+                ml={1}
+                fontFamily="Pokemon Solid"
+                color={"black"}
+              >
                 {isCatched ? "Release" : "Catch"}
               </Typography>
             </ButtonBase>
