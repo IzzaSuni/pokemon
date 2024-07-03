@@ -1,5 +1,5 @@
 import { FlexBox } from "@/src/components/core";
-import { TextInput } from "@/src/pages/list/list.styled.ts";
+import { TextInput } from "@/src/pages/list/list.styled";
 import { UilCheckCircle } from "@iconscout/react-unicons";
 import { Button } from "@mui/material";
 import { useAtom } from "jotai";
@@ -29,7 +29,7 @@ function MiniForm({ submit }: { submit: (nickname: string) => void }) {
       <TextInput
         size="small"
         label="give a nickname"
-        onChange={({ target: { value } }) => setNickname(value)}
+        onChange={({ target }) => setNickname(target?.value)}
       />
       <Button
         onClick={() => {
