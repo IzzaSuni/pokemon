@@ -69,3 +69,17 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--background-color-2) inset !important;
   -webkit-text-fill-color: var(--color) !important;
 }
+
+.snackbar div:nth-child(2) {
+  margin-left: unset;
+  padding-left: unset;
+}
+
+.snackbar div:nth-child(1) {
+  color: var(--background-color);
+}
+
+.snackbar {
+  background-color: var(--color) !important;
+  color: var(--background-color);
+}

@@ -13,6 +13,8 @@ import { queryClient } from "./network/network.config";
 import "./index.css";
 import ListPokemons from "./pages/list";
 import Detail from "./pages/detail";
+import { SnackbarProvider } from "notistack";
+import Favorite from "./pages/favorite";
 
 const path = [
   {
@@ -26,6 +28,10 @@ const path = [
   {
     path: "detail/:name",
     element: <Detail />,
+  },
+  {
+    path: "favorite",
+    element: <Favorite />,
   },
 ];
 
@@ -42,7 +48,19 @@ export default function App() {
   return (
     <React.Suspense fallback={null}>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <SnackbarProvider
+          className="snackbar"
+          variant="warning"
+          hideIconVariant
+          preventDuplicate
+          style={{
+            flexDirection: "column",
+            display: "flex",
+            alignItems: "start",
+          }}
+        >
+          <RouterProvider router={router} />
+        </SnackbarProvider>
       </QueryClientProvider>
     </React.Suspense>
   );

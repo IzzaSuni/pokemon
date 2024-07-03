@@ -1,6 +1,6 @@
 import { FlexBox } from "@/src/components/core";
 import { useGetPokemonDetail } from "@/src/network/useQueryPokemon";
-import { Box, Button, ButtonBase, Chip, Typography } from "@mui/material";
+import { Box, ButtonBase, Chip, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Image, ImageContainer, Progress } from "./detail.style";
 import useBreakPoint from "@/src/utils/hooks/useBreakPoint";
@@ -8,11 +8,16 @@ import { useEffect, useState } from "react";
 
 import PockemonPocketIcon from "@/src/assets/icon/pockemon-pocket.png";
 import useCatchPokemon from "@/src/utils/hooks/useCatchPokemon";
+import useReleasePokemon from "@/src/utils/hooks/useReleasePokemin";
 
 export default function Detail() {
   const params = useParams<{ name: string }>();
   const [urlImageIdx, setUrlImageIdx] = useState(0);
-  const { catchPokemon, catchedPokemon, setCatchedPokemon } = useCatchPokemon();
+  const { catchPokemon, isCatched, currentPokemonFavorite } = useCatchPokemon();
+  const { releasePokemon } = useReleasePokemon();
+
+  const buttonAction = isCatched ? releasePokemon : catchPokemon;
+
   const { isTablet } = useBreakPoint();
   const { data, isFetching } = useGetPokemonDetail(params?.name || "");
 
@@ -40,12 +45,23 @@ export default function Detail() {
     <>
       <FlexBox flexDirection={isTablet ? "row" : "column"}>
         {!isTablet && (
-          <ImageContainer margin="auto" width="60%" mb={5}>
+          <ImageContainer
+            margin="auto"
+            width="60%"
+            mb={5}
+            flexDirection={"column"}
+          >
             <Image width="100%" height="auto" src={images[urlImageIdx] || ""} />
-            <ButtonBase disableTouchRipple onClick={() => catchPokemon()}>
+            <ButtonBase disableTouchRipple onClick={() => buttonAction()}>
               <img src={PockemonPocketIcon} width={"30px"} height={"30px"} />
-              <Typography ml={1} fontFamily="Pokemon Solid">
-                Catch
+              <Typography
+                fontSize={12}
+                ml={1}
+                letterSpacing={3}
+                fontFamily="Pokemon Solid"
+                color={"var(--background-color)"}
+              >
+                {isCatched ? "Release" : "Catch"}
               </Typography>
             </ButtonBase>
           </ImageContainer>
@@ -55,10 +71,12 @@ export default function Detail() {
             fontFamily="Pokemon Solid"
             letterSpacing={5}
             variant="h1"
-            fontSize={isTablet ? 56 : 42}
+            fontSize={isTablet ? 56 : 32}
             width="100%"
-            textAlign={isTablet ? "left" : "center"}
+            textAlign={"center"}
           >
+            {currentPokemonFavorite?.nickname &&
+              `${currentPokemonFavorite?.nickname} as `}
             {params?.name}
           </Typography>
           <Typography
@@ -89,10 +107,11 @@ export default function Detail() {
         {isTablet && (
           <ImageContainer width="50%">
             <Image width="80%" height="auto" src={images[urlImageIdx] || ""} />
-            <ButtonBase disableTouchRipple onClick={() => catchPokemon()}>
+
+            <ButtonBase disableTouchRipple onClick={() => buttonAction()}>
               <img src={PockemonPocketIcon} width={"30px"} height={"30px"} />
-              <Typography ml={1} fontFamily="Pokemon Solid">
-                Catch
+              <Typography fontSize={12} ml={1} fontFamily="Pokemon Solid">
+                {isCatched ? "Release" : "Catch"}
               </Typography>
             </ButtonBase>
           </ImageContainer>

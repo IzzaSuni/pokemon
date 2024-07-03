@@ -19,10 +19,9 @@ export const Text = styled(Typography)`
   }
 `;
 
-export const Search = styled(TextField)`
+export const TextInput = styled(TextField)`
   background: var(--background-color-2);
   border-radius: 8px;
-  margin: 32px auto;
 
   label,
   input {
@@ -32,6 +31,10 @@ export const Search = styled(TextField)`
   fieldset {
     border-color: var(--color) !important;
   }
+`;
+
+export const Search = styled(TextInput)`
+  margin: 32px auto;
 `;
 
 export const Form = styled("form")`

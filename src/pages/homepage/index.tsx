@@ -10,7 +10,7 @@ import { useGetListPokemons } from "@/src/network/useQueryPokemon";
 export default function Homepage() {
   const { isDesktop } = useBreakPoint();
 
-  const { data } = useGetListPokemons({ page: 1, perPage: 1 });
+  const { data } = useGetListPokemons({ page: 1, perPage: 100 });
 
   return (
     <FlexBox

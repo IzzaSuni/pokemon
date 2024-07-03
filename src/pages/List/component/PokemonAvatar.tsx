@@ -4,7 +4,13 @@ import { Avatar } from "../list.styled";
 import { FlexBox } from "@/src/components/core";
 import { Link } from "react-router-dom";
 
-export default function PokemonAvatar({ name }: { name: string }) {
+export default function PokemonAvatar({
+  name,
+  nickname,
+}: {
+  name: string;
+  nickname?: string;
+}) {
   const { data, isFetching, isError } = useGetPokemonDetail(name);
 
   return (
@@ -24,8 +30,12 @@ export default function PokemonAvatar({ name }: { name: string }) {
             width="auto"
             textAlign="center"
             fontWeight={700}
+            maxWidth={92}
+            overflow={"hidden"}
+            textOverflow={"ellipsis"}
+            whiteSpace={"nowrap"}
           >
-            {name}
+            {nickname ?? name}
           </Typography>
         </Link>
       )}

@@ -6,7 +6,7 @@ import { FlexBox } from "@/src/components/core";
 import { UilFavorite, UilMoon, UilSun } from "@iconscout/react-unicons";
 import useTheme, { Theme } from "@/src/utils/hooks/useTheme";
 import { Container } from "./navbar.styled";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const { isDesktop } = useBreakPoint();
@@ -62,24 +62,26 @@ export default function Navbar() {
           />
         </Typography>
       </Button>
-      <Button
-        onClick={() => toggleTheme()}
-        size="large"
-        sx={{
-          borderRadius: "100%",
-          position: "absolute",
-          left: 0,
-          color: "inherit",
-          textTransform: "none",
-        }}
-      >
-        <UilFavorite
-          scale={2}
-          width={isDesktop ? "32px" : "24px"}
-          height={isDesktop ? "32px" : "24px"}
-        />
-        <Typography fontSize={isDesktop ? 16 : 12}>Favorite</Typography>
-      </Button>
+      <Link to={"/favorite"}>
+        <Button
+          onClick={() => toggleTheme()}
+          size="large"
+          sx={{
+            borderRadius: "100%",
+            position: "absolute",
+            left: 0,
+            color: "inherit",
+            textTransform: "none",
+          }}
+        >
+          <UilFavorite
+            scale={2}
+            width={isDesktop ? "32px" : "24px"}
+            height={isDesktop ? "32px" : "24px"}
+          />
+          <Typography fontSize={isDesktop ? 16 : 12}>Favorite</Typography>
+        </Button>
+      </Link>
     </Container>
   );
 }
