@@ -1,6 +1,6 @@
 import { useGetPokemonDetail } from "@/src/network/useQueryPokemon";
 import { Box, Skeleton, Typography } from "@mui/material";
-import { Avatar } from "../list.styled";
+import { Avatar } from "../listStyled";
 import { FlexBox } from "@/src/components/core";
 import { Link } from "react-router-dom";
 

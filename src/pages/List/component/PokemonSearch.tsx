@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { Form, Search } from "../list.styled";
+import { Form, Search } from "../listStyled";
 import { UilSearch, UilTrash } from "@iconscout/react-unicons";
 import { searchPokemonAtom } from "..";
 import { useAtom } from "jotai";
