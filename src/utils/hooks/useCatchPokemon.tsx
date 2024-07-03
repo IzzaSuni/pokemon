@@ -1,11 +1,8 @@
-import { FlexBox } from "@/src/components/core";
-import { TextInput } from "@/src/pages/list/list.styled";
-import { UilCheckCircle } from "@iconscout/react-unicons";
-import { Button } from "@mui/material";
+import MiniForm from "@/src/pages/list/component/MiniForm";
 import { useAtom } from "jotai";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { useSnackbar } from "notistack";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 
 export const catchPokemonAtom = atomWithStorage<
@@ -20,27 +17,6 @@ export const catchPokemonAtom = atomWithStorage<
   [],
   createJSONStorage(() => localStorage)
 );
-
-function MiniForm({ submit }: { submit: (nickname: string) => void }) {
-  const [nickname, setNickname] = useState("");
-
-  return (
-    <FlexBox width="100%" alignItems={"center"}>
-      <TextInput
-        size="small"
-        label="give a nickname"
-        onChange={({ target }) => setNickname(target?.value)}
-      />
-      <Button
-        onClick={() => {
-          submit(nickname);
-        }}
-      >
-        <UilCheckCircle color="green" />
-      </Button>
-    </FlexBox>
-  );
-}
 
 export default function useCatchPokemon() {
   const params = useParams<{ name: string }>();
