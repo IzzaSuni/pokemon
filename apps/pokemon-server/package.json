@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.ts",
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "build": "vercel build"
   },
   "dependencies": {
     "@libsql/client": "^0.7.0",
@@ -24,6 +25,6 @@
     "typescript": "^5.5.3"
   },
   "engines": {
-    "node": "22.x"
+    "node": "20.x"
   }
 }

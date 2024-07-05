@@ -37,3 +37,42 @@
 2024-07-05T17:08:49.954002Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2024-07-05T17:09:09.853217Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("turbo.json")}
 2024-07-05T17:09:09.853240Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(All)
+2024-07-05T17:14:15.536534Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/project.json")}
+2024-07-05T17:14:15.537040Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:14:15.591956Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:14:15.932562Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/config.json"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json")}
+2024-07-05T17:14:15.932570Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:14:15.932582Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:14:33.232966Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/package.json")}
+2024-07-05T17:14:33.233189Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:14:35.532707Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/config.json"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output")}
+2024-07-05T17:14:35.532717Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:14:35.532734Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:14:35.832671Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json")}
+2024-07-05T17:14:35.832680Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:14:35.832696Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:14:36.231954Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/config.json"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json")}
+2024-07-05T17:14:36.231962Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:14:36.231974Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:15:44.032051Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/package.json")}
+2024-07-05T17:15:44.032090Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:15:46.231831Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/config.json"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json")}
+2024-07-05T17:15:46.231841Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:15:46.233111Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:15:46.531755Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/config.json")}
+2024-07-05T17:15:46.531769Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:15:46.535500Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:24:22.036948Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/package.json")}
+2024-07-05T17:24:22.038266Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:24:29.030031Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/config.json")}
+2024-07-05T17:24:29.030054Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:24:29.030071Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:24:29.330101Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output"), AnchoredSystemPathBuf("apps/pokemon-server/.vercel/output/builds.json")}
+2024-07-05T17:24:29.330110Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:24:29.366820Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2024-07-05T17:25:03.730574Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/package.json")}
+2024-07-05T17:25:03.730589Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:26:04.235337Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".gitignore")}
+2024-07-05T17:26:04.235391Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-07-05T17:26:05.231679Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".gitignore")}
+2024-07-05T17:26:05.231710Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
