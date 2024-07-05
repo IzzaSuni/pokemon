@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
 import { ResponseStatus, response } from "../../../utils/responseWrapper";
-import { findPokemon } from "../utils/findOnePokemon";
 
 type Payload = {
   pokemon_name: string;
@@ -21,7 +20,9 @@ export async function catchPokemon(
     );
   }
 
-  const find = await findPokemon({ pokemon_name: pokemon_name });
+  const find = await PokemonFavoriteModel.findOne({
+    pokemon_name: pokemon_name,
+  });
 
   const isCatched = find?.pokemon_name;
 
@@ -62,10 +63,6 @@ export async function catchPokemon(
       )
     );
   }
-}
-
-export function renamePokemon(req: Request, res: Response) {
-  const { body } = req;
 }
 
 export async function getFavoritePokemon(req: Request, res: Response) {
