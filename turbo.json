@@ -4,7 +4,7 @@
     "build": {
       "outputs": ["dist/**"]
     },
-
+    "start": {},
     "check-types": {
       "dependsOn": ["^check-types"]
     },
