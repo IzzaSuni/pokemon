@@ -8,6 +8,6 @@ const mode = process.env.NODE_ENV || "development";
 export const getEnv = () => {
   return {
     ...(env as any),
-    mode,
+    isDev: mode === "development",
   };
 };

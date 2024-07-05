@@ -26,3 +26,4 @@ dist-ssr
 .turbo
 .turbo/daemon/592bf70d66505e44-turbo.log.2024-07-05
 /.turbo
+apps/pokemon-server/.env

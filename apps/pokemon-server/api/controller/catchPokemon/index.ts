@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
 import { ResponseStatus, response } from "../../../utils/responseWrapper";
 import assertIsError from "../../../utils/fn/assertError";
+import findOnePokemon from "../utils/findOnePokemon";
 
 type Payload = {
   pokemon_name: string;
@@ -20,7 +21,7 @@ export async function catchPokemon(
       throw { message: `pokemon ${pokemon_name} tidak ditemukan` };
     }
 
-    const find = await PokemonFavoriteModel.findOne({
+    const find = await findOnePokemon({
       pokemon_name: pokemon_name,
     });
 
@@ -56,7 +57,7 @@ export async function catchPokemon(
       );
     }
 
-    throw { message: "gagal menangkap silahkan coba lagi" };
+    throw { message: `gagal menangkap ${pokemon_name} silahkan coba lagi` };
   } catch (err) {
     assertIsError(err);
 
