@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
 import { ResponseStatus, response } from "../../../utils/responseWrapper";
+import assertIsError from "../../../utils/fn/assertError";
 
 type Payload = {
   pokemon_name: string;
@@ -14,58 +15,51 @@ export async function catchPokemon(
     body: { pokemon_name },
   } = req;
 
-  if (!pokemon_name) {
-    return res.json(
-      response(ResponseStatus.Error, `pokemon ${pokemon_name} tidak ditemukan`)
-    );
-  }
+  try {
+    if (!pokemon_name) {
+      throw { message: `pokemon ${pokemon_name} tidak ditemukan` };
+    }
 
-  const find = await PokemonFavoriteModel.findOne({
-    pokemon_name: pokemon_name,
-  });
-
-  const isCatched = find?.pokemon_name;
-
-  if (find?.nickname) {
-    return res.json(
-      response(
-        ResponseStatus.Error,
-        `${pokemon_name} sudah ada di kantongmu sebagai ${find?.nickname}`,
-        find
-      )
-    );
-  }
-
-  if (isCatched && !find?.nickname) {
-    return res.json(
-      response(
-        ResponseStatus.Success,
-        `${find?.pokemon_name} sudah tertangkap loh, yuk beri nama`,
-        find
-      )
-    );
-  }
-
-  const catched = Math.random() > 0.5;
-
-  if (catched) {
-    const newPokemon = new PokemonFavoriteModel({
-      iteration: 0,
-      pokemon_name,
+    const find = await PokemonFavoriteModel.findOne({
+      pokemon_name: pokemon_name,
     });
 
-    newPokemon.save();
+    const isCatched = find?.pokemon_name;
 
-    return res.json(
-      response(
-        ResponseStatus.Success,
-        `${pokemon_name} berhasil ditangkap, yuk beri nama`
-      )
-    );
+    if (find?.nickname) {
+      throw {
+        message: `${pokemon_name} sudah ada di kantongmu sebagai ${find?.nickname}`,
+      };
+    }
+
+    if (isCatched && !find?.nickname) {
+      throw {
+        message: `${find?.pokemon_name} sudah tertangkap loh, yuk beri nama`,
+      };
+    }
+
+    const catched = Math.random() > 0.5;
+
+    if (catched) {
+      const newPokemon = new PokemonFavoriteModel({
+        iteration: 0,
+        pokemon_name,
+      });
+
+      newPokemon.save();
+
+      return res.json(
+        response(
+          ResponseStatus.Success,
+          `${pokemon_name} berhasil ditangkap, yuk beri nama`
+        )
+      );
+    }
+
+    throw { message: "gagal menangkap silahkan coba lagi" };
+  } catch (err) {
+    assertIsError(err);
+
+    return res.json(response(ResponseStatus.Error, err?.message));
   }
-}
-
-export async function getFavoritePokemon(req: Request, res: Response) {
-  const list = await PokemonFavoriteModel.find();
-  return res.json(list);
 }

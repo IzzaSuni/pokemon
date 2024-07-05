@@ -1,7 +1,8 @@
 import express from "express";
-import { catchPokemon, getFavoritePokemon } from "../controller/catchPokemon";
+import { catchPokemon } from "../controller/catchPokemon";
 import { releasePokemon } from "../controller/releasePokemon";
 import { renamePokemon } from "../controller/renamePokemon";
+import { getFavoritePokemon } from "../controller/showPokemon";
 
 const router = express.Router();
 

@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import { ResponseStatus, response } from "../../../utils/responseWrapper";
 
 import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
+import assertIsError from "../../../utils/fn/assertError";
 
 type Payload = {
   nickname: string;
 };
+
 export async function releasePokemon(
   req: Request<null, null, Payload>,
   res: Response
@@ -14,23 +16,21 @@ export async function releasePokemon(
     body: { nickname },
   } = req;
 
-  if (!nickname) {
-    return res.json(response(ResponseStatus.Error, "nickname wajib diisi"));
-  }
-
   try {
+    if (!nickname) throw { message: "nickname wajib diisi" };
+
     const find = await PokemonFavoriteModel.findOneAndDelete({ nickname });
 
-    if (find) {
-      return res.json(
-        response(ResponseStatus.Success, `${find?.nickname} berhasil dilepas`)
-      );
-    }
+    if (!find) throw { message: `${nickname} tidak ditemukan` };
 
-    throw Error;
-  } catch (err) {
     return res.json(
-      response(ResponseStatus.Error, `${nickname} tidak ditemukan`)
+      response(ResponseStatus.Success, `${find?.nickname} berhasil dilepas`)
+    );
+  } catch (err) {
+    assertIsError(err);
+
+    return res.json(
+      response(ResponseStatus.Error, (err?.message || "") as string)
     );
   }
 }
