@@ -76,3 +76,9 @@
 2024-07-05T17:26:04.235391Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
 2024-07-05T17:26:05.231679Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".gitignore")}
 2024-07-05T17:26:05.231710Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2024-07-05T17:32:18.416490Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/package.json")}
+2024-07-05T17:32:18.417818Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:32:35.809503Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/package.json")}
+2024-07-05T17:32:35.809536Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
+2024-07-05T17:32:36.609911Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/pokemon-server/package.json")}
+2024-07-05T17:32:36.609920Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("pokemon-server"), path: AnchoredSystemPathBuf("apps/pokemon-server") }}))
