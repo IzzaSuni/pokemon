@@ -10,12 +10,14 @@ import express from "express";
 import helmet from "helmet";
 import ConnectDB from "./db/db.config";
 import router from "./api/route";
+import morgan from "morgan";
 
 // setup
 const app = express();
 
 app.use(express.json());
 app.use(helmet());
+app.use(morgan("common"));
 
 // connecting to DB
 ConnectDB();

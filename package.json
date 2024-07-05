@@ -4,6 +4,10 @@
   "description": "monorepo pokemon",
   "private": true,
   "packageManager": "yarn@1.22.19",
+  "scripts": {
+    "dev":"turbo dev",
+    "start": "turbo start"
+  },
   "dependencies": {
     "turbo": "^2.0.6"
   },
