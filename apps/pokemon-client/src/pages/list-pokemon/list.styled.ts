@@ -1,4 +1,4 @@
-import { TextField, Typography, styled } from "@mui/material";
+import { Pagination, TextField, Typography, styled } from "@mui/material";
 
 export const Avatar = styled("img")`
   border: 1px solid var(--color);
@@ -6,6 +6,10 @@ export const Avatar = styled("img")`
   background: var(--color);
   width: 90px;
   height: 90px;
+  min-width: 90px;
+  min-height: 90px;
+  max-width: 90px;
+  max-height: 90px;
   object-fit: scale-down;
 `;
 
@@ -41,4 +45,15 @@ export const Form = styled("form")`
   width: 100%;
   display: flex;
   justify-content: center;
+`;
+
+export const PaginationStyled = styled(Pagination)`
+  padding: 8px;
+  justify-content: center;
+  display: flex;
+
+  button {
+    border-color: var(--color);
+    color: var(--color);
+  }
 `;

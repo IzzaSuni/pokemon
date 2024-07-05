@@ -2,6 +2,8 @@
   "name": "shared-types",
   "version": "1.0.0",
   "homepage": ".",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "exports": {
     "./types": "./types/index.ts",
     ".": "./index.ts"
