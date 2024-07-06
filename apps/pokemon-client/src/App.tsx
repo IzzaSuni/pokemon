@@ -15,6 +15,7 @@ import ListPokemons from "./pages/list-pokemon";
 import Detail from "./pages/detail";
 import { SnackbarProvider } from "notistack";
 import Favorite from "./pages/favorite";
+import ErrorBoundary from "./pages/404";
 
 const path = [
   {
@@ -35,19 +36,15 @@ const path = [
   },
   {
     path: "*",
-    element: (
-      <h2 style={{ width: "300px", margin: "auto", textAlign: "center" }}>
-        404 Not Found
-      </h2>
-    ),
+    element: <ErrorBoundary />,
   },
 ];
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Layout />}>
+    <Route element={<Layout />} errorElement={<ErrorBoundary />}>
       {path?.map((v) => (
-        <Route index {...v} />
+        <Route index {...v} errorElement={<ErrorBoundary />} />
       ))}
     </Route>
   )
