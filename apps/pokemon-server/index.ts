@@ -3,7 +3,14 @@ import helmet from "helmet";
 import ConnectDB from "./db/db.config";
 import router from "./api/route";
 import morgan from "morgan";
-import pokemonValidator from "./api/middleware/pokemonValidator";
+import { rateLimit } from "express-rate-limit";
+
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  limit: 100,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+});
 
 // setup
 const app = express();
@@ -12,6 +19,7 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+app.use(limiter);
 
 // connecting to DB
 ConnectDB();
