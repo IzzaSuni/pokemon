@@ -28,7 +28,7 @@ export default function Favorite() {
       <Typography variant="h4" width="100%" textAlign="center" my={2}>
         My Pokemon
       </Typography>
-      <PokemonSearch />
+      {data?.data?.length && <PokemonSearch />}
       <FlexBox flexWrap="wrap" gap={1} justifyContent={"center"}>
         {data?.data?.map((pokemon) => (
           <FlexBox>
@@ -42,17 +42,21 @@ export default function Favorite() {
         {isFetching && <LoadingPokemonState count={20} />}
         {isEmpty && (
           <Typography textAlign="center">
-            Maaf tidak ada pokemonmu dengan nama {search}
+            {search
+              ? `Maaf tidak ada ${search} disini}`
+              : "Kamu belom punya pokemon favorite"}
           </Typography>
         )}
       </FlexBox>
-      <PaginationStyled
-        count={Math.floor((data?.pagination?.count || 10) / 10) || 1}
-        onChange={(_, page) => setPage(page)}
-        size={isDesktop ? "large" : "medium"}
-        variant="outlined"
-        color="primary"
-      />
+      {data?.data?.length && (
+        <PaginationStyled
+          count={Math.floor((data?.pagination?.count || 10) / 10) || 1}
+          onChange={(_, page) => setPage(page)}
+          size={isDesktop ? "large" : "medium"}
+          variant="outlined"
+          color="primary"
+        />
+      )}
     </Box>
   );
 }
