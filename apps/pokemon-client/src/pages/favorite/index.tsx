@@ -28,7 +28,7 @@ export default function Favorite() {
       <Typography variant="h4" width="100%" textAlign="center" my={2}>
         My Pokemon
       </Typography>
-      {!!data?.data?.length && <PokemonSearch />}
+      {(!!data?.data?.length || search) && <PokemonSearch />}
       <FlexBox flexWrap="wrap" gap={1} justifyContent={"center"}>
         {data?.data?.map((pokemon) => (
           <FlexBox>
