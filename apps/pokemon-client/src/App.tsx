@@ -8,8 +8,8 @@ import {
 import Layout from "./layout";
 import "./index.css";
 import Homepage from "./pages/homepage";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./network/network.config";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { persister, queryClient } from "./network/network.config";
 import "./index.css";
 import ListPokemons from "./pages/list-pokemon";
 import Detail from "./pages/detail";
@@ -52,7 +52,10 @@ const router = createBrowserRouter(
 export default function App() {
   return (
     <React.Suspense fallback={null}>
-      <QueryClientProvider client={queryClient}>
+      <PersistQueryClientProvider
+        client={queryClient}
+        persistOptions={{ persister: persister }}
+      >
         <SnackbarProvider
           className="snackbar"
           variant="warning"
@@ -66,7 +69,7 @@ export default function App() {
         >
           <RouterProvider router={router} />
         </SnackbarProvider>
-      </QueryClientProvider>
+      </PersistQueryClientProvider>
     </React.Suspense>
   );
 }
