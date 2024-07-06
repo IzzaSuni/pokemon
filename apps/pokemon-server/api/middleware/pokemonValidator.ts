@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { pokemon_client } from "shared-types";
+import { PokemonClient } from "pokenode-ts";
 import assertIsError from "../../utils/fn/assertError";
 import { ResponseStatus, response } from "../../utils/responseWrapper";
 
@@ -14,6 +14,8 @@ export default async function pokemonValidator(
   res: Response,
   next: NextFunction
 ) {
+  const pokemon_client = new PokemonClient();
+
   try {
     if (req.method === "POST") {
       if (!req.body.pokemon_name) return next();
