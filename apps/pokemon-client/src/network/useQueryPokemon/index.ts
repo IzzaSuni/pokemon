@@ -15,3 +15,5 @@ export function useGetPokemonDetail(name: string) {
     { enabled: !!name }
   );
 }
+
+export function useGetFavoritePokemon() {}

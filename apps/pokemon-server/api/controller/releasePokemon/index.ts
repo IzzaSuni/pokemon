@@ -1,14 +1,12 @@
 import { Request, Response } from "express";
 import { ResponseStatus, response } from "../../../utils/responseWrapper";
 
-import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
 import assertIsError from "../../../utils/fn/assertError";
 import { getIsPrime } from "../../../utils/fn/primeNumber";
-import findOnePokemon from "../utils/findOnePokemon";
+import { findPokemonById } from "../utils/findOnePokemon";
 
 type Payload = {
-  nickname: string;
-  pokemon_name: string;
+  id: string;
 };
 
 export async function releasePokemon(
@@ -16,26 +14,28 @@ export async function releasePokemon(
   res: Response
 ) {
   const {
-    body: { nickname, pokemon_name },
+    body: { id },
   } = req;
 
   try {
-    if (!pokemon_name) throw { message: "nama pokemon wajib diisi" };
+    if (!id) throw { message: "id pokemon wajib diisi" };
 
-    const find = await findOnePokemon({ pokemon_name });
+    const data = await findPokemonById(id);
 
-    if (!find) throw { message: `${pokemon_name} tidak ditemukan` };
+    // case not found a pokemon
+    if (!data) throw { message: `${id} tidak ditemukan` };
 
+    // case found and try delete one
     const randomNum = Math.floor(Math.random() * (Math.floor(1000) + 1));
 
     if (!getIsPrime(randomNum)) {
-      throw { message: `Maaf gagal melepas ${pokemon_name}` };
+      throw { message: `Maaf gagal melepas ${id}` };
     }
 
-    await find.deleteOne();
+    await data.deleteOne();
 
     return res.json(
-      response(ResponseStatus.Success, `${find?.nickname} berhasil dilepas`)
+      response(ResponseStatus.Success, `${data?.nickname} berhasil dilepas`)
     );
   } catch (err) {
     assertIsError(err);

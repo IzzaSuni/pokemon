@@ -1,7 +1,7 @@
 import { FilterQuery } from "mongoose";
 import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
 
-export default async function findOnePokemon(
+export async function findOnePokemon(
   filter: FilterQuery<{
     nickname?: string | null | undefined;
     pokemon_name?: string | null | undefined;
@@ -9,6 +9,12 @@ export default async function findOnePokemon(
   }>
 ) {
   const find = await PokemonFavoriteModel.findOne(filter);
+
+  return find;
+}
+
+export async function findPokemonById(id: string) {
+  const find = await PokemonFavoriteModel.findById(id);
 
   return find;
 }

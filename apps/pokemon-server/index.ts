@@ -12,7 +12,6 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
-app.use(pokemonValidator);
 
 // connecting to DB
 ConnectDB();

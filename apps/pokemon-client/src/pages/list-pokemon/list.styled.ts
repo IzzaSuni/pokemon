@@ -48,7 +48,7 @@ export const Form = styled("form")`
 `;
 
 export const PaginationStyled = styled(Pagination)`
-  padding: 8px;
+  padding-top: 24px;
   justify-content: center;
   display: flex;
 

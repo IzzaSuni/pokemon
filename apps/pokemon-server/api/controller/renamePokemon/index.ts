@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { ResponseStatus, response } from "../../../utils/responseWrapper";
 import assertIsError from "../../../utils/fn/assertError";
-import findOnePokemon from "../utils/findOnePokemon";
+import { findPokemonById } from "../utils/findOnePokemon";
 import fibonacci from "../../../utils/fn/fibonaci";
+
 type Payload = {
-  pokemon_name: string;
+  id: string;
   nickname: string;
 };
 
@@ -13,66 +14,76 @@ export async function renamePokemon(
   res: Response
 ) {
   const {
-    body: { pokemon_name, nickname },
+    body: { id, nickname },
   } = req;
 
-  if (!pokemon_name) {
-    throw {
-      message: `nama pokemon wajib diisi`,
-    };
-  }
+  console.log(req.body);
 
   try {
-    const find = await findOnePokemon({ pokemon_name });
+    if (!id) {
+      throw {
+        message: `id pokemon wajib diisi`,
+      };
+    }
 
-    if (!find) throw { message: `${pokemon_name} tidak ditemukan` };
+    const data = await findPokemonById(id);
 
-    if (!find.iteration) find.iteration = 0;
+    // case not found
+    if (!data) throw { message: `pokemon tidak ditemukan` };
 
-    if (!find?.iteration) {
+    if (!data.iteration) data.iteration = 0;
+
+    if (!data?.iteration) {
+      // case catched but not assigned a nickname yet but nickname nil in request
       if (!nickname) throw { message: "panggilan pokemon wajib diisi" };
 
-      find.nickname = nickname;
-      find.iteration = find.iteration + 1;
-      find.save();
+      // case catched but trying to assign nickname
+      data.nickname = nickname;
+      data.iteration = data.iteration + 1;
+      await data.save();
 
       return res.json(
         response(
           ResponseStatus.Success,
           "Berhasil memberi nama panggilan",
-          find
+          data
         )
       );
     }
 
-    if (find.nickname) {
-      const prevIterationName = ` - ${fibonacci(find.iteration)}`;
-      const nextIterationName = ` - ${fibonacci(find.iteration + 1)}`;
+    // case having a nickname before an trying to be renamed using fibonaci sequence
+    if (data.nickname) {
+      const prevIterationName = ` - ${fibonacci(data.iteration)}`;
+      const nextIterationName = ` - ${fibonacci(data.iteration + 1)}`;
 
-      if (find.nickname.includes(prevIterationName) && find.iteration >= 0) {
-        find.nickname = find.nickname.replace(
+      if (data.nickname.includes(prevIterationName) && data.iteration >= 0) {
+        data.nickname = data.nickname.replace(
           prevIterationName,
           nextIterationName
         );
       } else {
-        find.nickname = find.nickname + nextIterationName;
+        data.nickname = data.nickname + nextIterationName;
       }
 
-      find.iteration = (find.iteration ?? 0) + 1;
+      data.iteration = (data.iteration ?? 0) + 1;
 
-      await find.save();
+      await data.save();
 
       return res.json(
         response(
           ResponseStatus.Success,
-          `Sukses ${find?.iteration ? "merubah" : "memberi"} nama panggilan`,
-          find
+          `Sukses ${data?.iteration ? "merubah" : "memberi"} nama panggilan`,
+          data
         )
       );
     }
 
-    find.iteration = 0;
-    await find.save();
+    /* case having an iteration (meaning have a renamed function before) 
+    but doesn't have nickname probably dirty data
+    */
+
+    data.iteration = 0;
+    await data.save();
 
     return res.json(
       response(
@@ -81,8 +92,8 @@ export async function renamePokemon(
       )
     );
   } catch (err) {
+    console.log(err, "asd");
     assertIsError(err);
-
     return res.json(response(ResponseStatus.Error, err?.message));
   }
 }
