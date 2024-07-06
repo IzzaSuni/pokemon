@@ -17,6 +17,7 @@ export default function Detail() {
 
   const { action, favoritePokemon, isCatched, isPending, isNamed } =
     useActionPokemon();
+  const { action: rename, isPending: isRenaming } = useActionPokemon();
 
   const { isTablet } = useBreakPoint();
   const { data, isFetching } = useGetPokemonDetail(params?.name || "");
@@ -95,9 +96,9 @@ export default function Detail() {
           <FlexBox justifyContent={"center"} mt={4}>
             {isNamed && (
               <ButtonAction
-                disable={isPending}
-                onClick={() => action("", true)}
-                text="Rename"
+                disable={isRenaming}
+                onClick={() => rename("", true)}
+                text={isRenaming ? "Renaming..." : "Rename"}
                 color="var(--color)"
               />
             )}
