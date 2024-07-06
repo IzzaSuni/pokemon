@@ -37,7 +37,7 @@ export type RequestArgs = {
 export const API_BASE_URL =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:3001/"
-    : "pokemon-discover-api.vercel.app";
+    : "https://pokemon-discover-api.vercel.app";
 
 export default function request<Res>({
   method,
