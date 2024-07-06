@@ -3,6 +3,7 @@ import { Box, Snackbar } from "@mui/material";
 import useTheme from "../utils/hooks/useTheme";
 import useBreakPoint, { breakpoint } from "../utils/hooks/useBreakPoint";
 import { Outlet } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Layout() {
   useTheme();
@@ -10,6 +11,7 @@ export default function Layout() {
 
   return (
     <Box>
+      <Analytics />
       <Navbar />
       <Box
         margin="auto"
