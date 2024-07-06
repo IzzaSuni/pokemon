@@ -3,6 +3,7 @@ import { ResponseStatus, response } from "../../../utils/responseWrapper";
 import assertIsError from "../../../utils/fn/assertError";
 import { findPokemonById } from "../utils/findOnePokemon";
 import fibonacci from "../../../utils/fn/fibonaci";
+import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
 
 type Payload = {
   id: string;
@@ -36,6 +37,15 @@ export async function renamePokemon(
     if (!data?.iteration) {
       // case catched but not assigned a nickname yet but nickname nil in request
       if (!nickname) throw { message: "panggilan pokemon wajib diisi" };
+
+      const anotherPokemon = await PokemonFavoriteModel.findOne({ nickname });
+
+      // case nickname owned by another pokemon
+      if (anotherPokemon) {
+        throw {
+          message: `nama ${nickname} sudah diberikan kepada ${anotherPokemon.pokemon_name}`,
+        };
+      }
 
       // case catched but trying to assign nickname
       data.nickname = nickname;

@@ -3,36 +3,43 @@ import { PokemonFavoriteModel } from "../../../db/models/PokemonFavorite";
 import { response } from "../../../utils/responseWrapper";
 import getPagination from "../utils/getPagination";
 
-type Pagination = {
+type Query = {
   offset: string;
   limit: string;
   search: string;
+  pokemon_name: string;
 };
 
 export async function getFavoritePokemon(
-  req: Request<null, null, null, Pagination>,
+  req: Request<null, null, null, Query>,
   res: Response
 ) {
   const {
-    query: { offset, limit, search },
+    query: { offset, limit, search, pokemon_name },
   } = req;
 
-  const dbQuery = { $regex: search, $options: "i" };
+  const searchQuery = { $regex: search, $options: "i" };
 
-  const data = await PokemonFavoriteModel.find(
-    search
-      ? {
-          $or: [{ nickname: dbQuery }, { pokemon_name: dbQuery }],
-        }
-      : {}
-  )
-    ?.limit(parseInt(limit) || 100)
-    .skip(parseInt(offset));
+  if (!pokemon_name) {
+    const data = await PokemonFavoriteModel.find(
+      search
+        ? {
+            $or: [{ nickname: searchQuery }, { pokemon_name: searchQuery }],
+          }
+        : {}
+    )
+      ?.limit(parseInt(limit) || 100)
+      .skip(parseInt(offset));
 
-  const pagination = getPagination(
-    req,
-    await PokemonFavoriteModel.countDocuments()
-  );
+    const pagination = getPagination(
+      req,
+      await PokemonFavoriteModel.countDocuments()
+    );
 
-  return res.json(response(data, pagination));
+    return res.json(response(data, pagination));
+  }
+
+  const data = await PokemonFavoriteModel.findOne({ pokemon_name });
+
+  return res.json(response(data));
 }

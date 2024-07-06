@@ -8,7 +8,7 @@ import {
 import Layout from "./layout";
 import "./index.css";
 import Homepage from "./pages/homepage";
-import { QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./network/network.config";
 import "./index.css";
 import ListPokemons from "./pages/list-pokemon";
@@ -32,6 +32,14 @@ const path = [
   {
     path: "favorite",
     element: <Favorite />,
+  },
+  {
+    path: "*",
+    element: (
+      <h2 style={{ width: "300px", margin: "auto", textAlign: "center" }}>
+        404 Not Found
+      </h2>
+    ),
   },
 ];
 

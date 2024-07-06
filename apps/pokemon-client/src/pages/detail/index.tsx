@@ -1,37 +1,56 @@
 import { FlexBox } from "@/src/components/core";
 import { useGetPokemonDetail } from "@/src/network/useQueryPokemon";
-import { Box, ButtonBase, Chip, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { Image, ImageContainer, Progress } from "./detail.style";
 import useBreakPoint from "@/src/utils/hooks/useBreakPoint";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-import PockemonPocketIcon from "@/src/assets/icon/pockemon-pocket.png";
-import useCatchPokemon from "@/src/utils/hooks/useCatchPokemon";
-import useReleasePokemon from "@/src/utils/hooks/useReleasePokemin";
+import LoadingState from "@/src/components/LoadingState";
+import useActionPokemon from "@/src/utils/hooks/useActionPokemon";
+import ButtonAction from "./component/ButtonAction";
+import PokemonDataView from "./component/PokemonDataView";
 
 export default function Detail() {
   const params = useParams<{ name: string }>();
   const [urlImageIdx, setUrlImageIdx] = useState(0);
-  const { catchPokemon, isCatched, currentPokemonFavorite } = useCatchPokemon();
-  const { releasePokemon } = useReleasePokemon();
 
-  const buttonAction = isCatched ? releasePokemon : catchPokemon;
+  const { action, favoritePokemon, isCatched, isPending, isNamed } =
+    useActionPokemon();
 
   const { isTablet } = useBreakPoint();
   const { data, isFetching } = useGetPokemonDetail(params?.name || "");
 
-  const sortedStats = data?.stats
-    ?.map((v) => v.base_stat)
-    .sort((a, b) => a - b);
-  const MAX = sortedStats?.pop() ?? 100;
+  const getProgress = useCallback(
+    (value: number) => {
+      const sortedStats = data?.stats
+        ?.map((v) => v.base_stat)
+        .sort((a, b) => a - b);
 
-  const normalise = (value: number) =>
-    MAX > 100 ? (value * 100) / MAX : value;
+      const MAX = sortedStats?.pop() ?? 100;
 
-  const images = Object.values(
-    data?.sprites.other?.["official-artwork"] || {}
-  ).filter((e) => e);
+      return MAX > 100 ? (value * 100) / MAX : value;
+    },
+    [data]
+  );
+
+  const buttonCopy = useMemo(() => {
+    if (!isNamed && isCatched) {
+      return isPending ? "Giving name..." : "Give name";
+    }
+
+    if (isCatched) {
+      return isPending ? "Releasing..." : "Release";
+    }
+
+    return isPending ? "Catching..." : "Catch";
+  }, [isPending, isCatched, isNamed]);
+
+  const images = useMemo(() => {
+    return Object.values(
+      data?.sprites.other?.["official-artwork"] || {}
+    ).filter((e) => e);
+  }, [data]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,6 +59,8 @@ export default function Detail() {
 
     return () => clearInterval(interval);
   }, [images.length]);
+
+  if (isFetching) return <LoadingState />;
 
   return (
     <>
@@ -52,18 +73,11 @@ export default function Detail() {
             flexDirection={"column"}
           >
             <Image width="100%" height="auto" src={images[urlImageIdx] || ""} />
-            <ButtonBase disableTouchRipple onClick={() => buttonAction()}>
-              <img src={PockemonPocketIcon} width={"30px"} height={"30px"} />
-              <Typography
-                fontSize={12}
-                ml={1}
-                letterSpacing={3}
-                fontFamily="Pokemon Solid"
-                color={"black"}
-              >
-                {isCatched ? "Release" : "Catch"}
-              </Typography>
-            </ButtonBase>
+            <ButtonAction
+              disable={isPending}
+              onClick={() => action()}
+              text={buttonCopy}
+            />
           </ImageContainer>
         )}
         <Box width={isTablet ? "50%" : "100%"}>
@@ -75,15 +89,24 @@ export default function Detail() {
             width="100%"
             textAlign={"center"}
           >
-            {currentPokemonFavorite?.nickname &&
-              `${currentPokemonFavorite?.nickname} as `}
+            {favoritePokemon?.nickname && `${favoritePokemon?.nickname} as `}
             {params?.name}
           </Typography>
+          <FlexBox justifyContent={"center"} mt={4}>
+            {isNamed && (
+              <ButtonAction
+                disable={isPending}
+                onClick={() => action("", true)}
+                text="Rename"
+                color="var(--color)"
+              />
+            )}
+          </FlexBox>
           <Typography
             fontSize={isTablet ? 42 : 36}
             variant="h3"
             width="100%"
-            my={2}
+            my={4}
           >
             Statistic
           </Typography>
@@ -96,7 +119,7 @@ export default function Detail() {
                 <Box sx={{ width: "70%" }}>
                   <Progress
                     variant={isFetching ? "indeterminate" : "determinate"}
-                    value={normalise(v.base_stat)}
+                    value={getProgress(v.base_stat)}
                     label={v.base_stat}
                   />
                 </Box>
@@ -107,61 +130,15 @@ export default function Detail() {
         {isTablet && (
           <ImageContainer width="50%">
             <Image width="80%" height="auto" src={images[urlImageIdx] || ""} />
-
-            <ButtonBase disableTouchRipple onClick={() => buttonAction()}>
-              <img src={PockemonPocketIcon} width={"30px"} height={"30px"} />
-              <Typography
-                fontSize={12}
-                ml={1}
-                fontFamily="Pokemon Solid"
-                color={"black"}
-              >
-                {isCatched ? "Release" : "Catch"}
-              </Typography>
-            </ButtonBase>
+            <ButtonAction
+              disable={isPending}
+              onClick={() => action()}
+              text={buttonCopy}
+            />
           </ImageContainer>
         )}
       </FlexBox>
-      <FlexBox flexWrap={"wrap"} mt={6}>
-        <Box>
-          <Typography variant="h3" fontSize={isTablet ? 42 : 36}>
-            moves
-          </Typography>
-          <FlexBox padding={2} flexWrap={"wrap"} gap={1}>
-            {data?.moves?.map((v) => (
-              <Chip
-                sx={{
-                  background:
-                    "linear-gradient(-45deg, #60efff 0%, #0061ff 100% );",
-                  color: "var(--color)",
-                }}
-                key={v.move.name}
-                variant="outlined"
-                label={v.move.name.replace("-", " ")}
-              />
-            ))}
-          </FlexBox>
-        </Box>
-        <Box width="fit-content">
-          <Typography variant="h3" fontSize={isTablet ? 42 : 36}>
-            Type
-          </Typography>
-          <FlexBox padding={2} flexWrap={"wrap"} gap={1}>
-            {data?.types?.map((v) => (
-              <Chip
-                sx={{
-                  background:
-                    "linear-gradient(-45deg, #60efff 0%, #0061ff 100% );",
-                  color: "var(--color)",
-                }}
-                key={v.type?.name}
-                variant="outlined"
-                label={v.type?.name.replace("-", " ")}
-              />
-            ))}
-          </FlexBox>
-        </Box>
-      </FlexBox>
+      <PokemonDataView data={data} />
     </>
   );
 }

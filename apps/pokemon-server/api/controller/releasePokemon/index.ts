@@ -23,13 +23,13 @@ export async function releasePokemon(
     const data = await findPokemonById(id);
 
     // case not found a pokemon
-    if (!data) throw { message: `${id} tidak ditemukan` };
+    if (!data) throw { message: `pokemon tidak ditemukan` };
 
     // case found and try delete one
     const randomNum = Math.floor(Math.random() * (Math.floor(1000) + 1));
 
     if (!getIsPrime(randomNum)) {
-      throw { message: `Maaf gagal melepas ${id}` };
+      throw { message: `Maaf gagal melepas ${data?.nickname}` };
     }
 
     await data.deleteOne();

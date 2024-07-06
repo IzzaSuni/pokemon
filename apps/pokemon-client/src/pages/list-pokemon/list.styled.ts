@@ -24,21 +24,33 @@ export const Text = styled(Typography)`
 `;
 
 export const TextInput = styled(TextField)`
-  background: var(--background-color-2);
   border-radius: 8px;
 
   label,
   input {
-    color: var(--color) !important;
+    color: var(--background-color) !important;
+    border-radius: 8px;
   }
 
   fieldset {
-    border-color: var(--color) !important;
+    border-color: var(--background-color-2) !important;
+    border-radius: 8px;
   }
 `;
 
 export const Search = styled(TextInput)`
   margin: 32px auto;
+
+  label,
+  input {
+    color: var(--color) !important;
+    border-radius: 8px;
+  }
+
+  fieldset {
+    border-color: var(--color) !important;
+    border-radius: 8px;
+  }
 `;
 
 export const Form = styled("form")`

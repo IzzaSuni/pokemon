@@ -9,41 +9,40 @@ export type Pagination = {
   previous: number;
 };
 
+type Data = object | [] | null;
+
 export type ApiResponse = {
   status: ResponseStatus;
   message: string;
-  data: object | [];
+  data: Data;
   pagination?: Pagination;
 };
 
 // Overload signatures
 export function response(status: ResponseStatus, message: string): ApiResponse;
-export function response(data: object | []): ApiResponse;
+export function response(data: Data): ApiResponse;
+export function response(data: Data, pagination: Pagination): ApiResponse;
 export function response(
-  data: object | [],
-  pagination: Pagination
+  status: ResponseStatus,
+  message: string,
+  data: Data
 ): ApiResponse;
 export function response(
   status: ResponseStatus,
   message: string,
-  data: object | []
-): ApiResponse;
-export function response(
-  status: ResponseStatus,
-  message: string,
-  data: object | [],
+  data: Data,
   pagination: Pagination
 ): ApiResponse;
 
 // Implementation
 export function response(
-  statusOrData: ResponseStatus | object | [],
+  statusOrData: ResponseStatus | Data,
   messageOrPagination?: string | Pagination,
-  dataOrPagination?: object | [] | Pagination,
+  dataOrPagination?: Data | Pagination,
   pagination?: Pagination
 ): ApiResponse {
   if (typeof statusOrData === "object" || Array.isArray(statusOrData)) {
-    // Handles response(data: object | [])
+    // Handles response(data: Data)
     if (typeof messageOrPagination === "undefined") {
       return {
         status: ResponseStatus.Success,
@@ -52,7 +51,7 @@ export function response(
       };
     }
 
-    // Handles response(data: object | [], pagination: Pagination)
+    // Handles response(data: Data, pagination: Pagination)
     return {
       status: ResponseStatus.Success,
       message: "sukses",
@@ -71,20 +70,20 @@ export function response(
       };
     }
 
-    // Handles response(status: ResponseStatus, message: string, data: object | [])
+    // Handles response(status: ResponseStatus, message: string, data: Data)
     if (typeof pagination === "undefined") {
       return {
         status: statusOrData,
         message: messageOrPagination,
-        data: dataOrPagination as object | [],
+        data: dataOrPagination as Data,
       };
     }
 
-    // Handles response(status: ResponseStatus, message: string, data: object | [], pagination: Pagination)
+    // Handles response(status: ResponseStatus, message: string, data: Data, pagination: Pagination)
     return {
       status: statusOrData,
       message: messageOrPagination,
-      data: dataOrPagination as object | [],
+      data: dataOrPagination as Data,
       pagination: pagination,
     };
   }

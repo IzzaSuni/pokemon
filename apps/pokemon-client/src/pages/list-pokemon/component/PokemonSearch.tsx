@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { Form, Search } from "../list.styled";
-import { UilSearch, UilTrash } from "@iconscout/react-unicons";
+import { UilSearch } from "@iconscout/react-unicons";
 import { searchPokemonAtom } from "..";
 import { useAtom } from "jotai";
 import useBreakPoint from "@/src/utils/hooks/useBreakPoint";
@@ -45,7 +45,7 @@ export default function PokemonSearch() {
                   sx={{ color: "var(--color)" }}
                   variant="text"
                 >
-                  <UilTrash />
+                  X
                 </Button>
               )}
             </>

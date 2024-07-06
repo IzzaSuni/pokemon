@@ -76,6 +76,7 @@ export default function ListPokemons() {
             />
           </FlexBox>
         ) : (
+          !isError &&
           data?.results?.map((value) => (
             <PokemonAvatar key={value?.name} name={value?.name} />
           ))
@@ -100,13 +101,15 @@ export default function ListPokemons() {
         {search && isSuccess && <PokemonAvatar name={searchQuery?.name} />}
       </FlexBox>
 
-      <PaginationStyled
-        count={Math.floor((dataTotal?.count || 100) / 100)}
-        onChange={(_e, nextPage) => setPage(nextPage)}
-        size={isDesktop ? "large" : "medium"}
-        variant="outlined"
-        color="primary"
-      />
+      {!isError && (
+        <PaginationStyled
+          count={Math.floor((dataTotal?.count || 100) / 100)}
+          onChange={(_e, nextPage) => setPage(nextPage)}
+          size={isDesktop ? "large" : "medium"}
+          variant="outlined"
+          color="primary"
+        />
+      )}
     </FlexBox>
   );
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-export const breakpoint = { s: 1024, m: 1280, l: 1400 };
+export const breakpoint = { xs: 300, s: 500, m: 1080, l: 1280 };
 
 export default function useBreakPoint() {
-  const isDesktop = window.innerWidth >= breakpoint.m;
-  const isTablet = window.innerWidth >= breakpoint.s && !isDesktop;
+  const isDesktop = window.innerWidth >= breakpoint.l;
+  const isTablet = window.innerWidth >= breakpoint.m;
 
   const [breakPoint, setBreakPoint] = useState({
     isDesktop,
@@ -14,8 +14,8 @@ export default function useBreakPoint() {
   useEffect(() => {
     function watchIsDesktop() {
       setBreakPoint({
-        isDesktop: window.innerWidth >= breakpoint.m,
-        isTablet: window.innerWidth >= breakpoint.s,
+        isDesktop: window.innerWidth >= breakpoint.l,
+        isTablet: window.innerWidth >= breakpoint.m,
       });
     }
 

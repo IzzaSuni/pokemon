@@ -13,7 +13,7 @@ export default function Layout() {
       <Navbar />
       <Box
         margin="auto"
-        mt={isDesktop ? 24 : 8}
+        mt={isDesktop ? 16 : 8}
         maxWidth={isDesktop ? breakpoint.m : "auto"}
         padding={1}
       >
