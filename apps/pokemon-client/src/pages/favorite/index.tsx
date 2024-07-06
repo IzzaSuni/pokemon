@@ -51,7 +51,7 @@ export default function Favorite() {
       {!!data?.data?.length && (
         <PaginationStyled
           count={Math.floor((data?.pagination?.count || 10) / 10) || 1}
-          onChange={(_, page) => setPage(page)}
+          onChange={(_, page) => setPage(page - 1)}
           size={isDesktop ? "large" : "medium"}
           variant="outlined"
           color="primary"
