@@ -40,7 +40,7 @@ export default function Favorite() {
           </FlexBox>
         ))}
         {isFetching && <LoadingPokemonState count={20} />}
-        {isEmpty && (
+        {isEmpty && !isFetching && (
           <Typography textAlign="center">
             {search
               ? `Maaf tidak ada ${search} disini}`
